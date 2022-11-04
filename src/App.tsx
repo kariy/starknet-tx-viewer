@@ -10,8 +10,8 @@ function App() {
         <BrowserRouter>
             <Provider>
                 <Routes>
+                    <Route path="/:chainId/:txHash" element={<TxViewer />} />
                     <Route path="/" element={<Home />} />
-                    <Route path="/:chain/:txHash" element={<TxViewer />} />
                 </Routes>
             </Provider>
         </BrowserRouter>

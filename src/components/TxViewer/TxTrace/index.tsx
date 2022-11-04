@@ -1,20 +1,27 @@
 import styled from "styled-components";
 
+import FeeTransfer from "./FeeTransfer";
+import FunctionTrace from "./FunctionInvocation";
+
 const Container = styled.div`
     border: 1px solid green;
-    flex: 1;
+    overflow-y: scroll;
 `;
 
-function TxTraceContainer() {
+const Wrapper = styled.div`
+    width: max-content;
+    padding: 1.5rem;
+`;
+
+function TxTrace() {
     return (
         <Container>
-            <TxTrace />
+            <Wrapper>
+                <FunctionTrace />
+                <FeeTransfer />
+            </Wrapper>
         </Container>
     );
 }
 
-function TxTrace() {
-    return <>tx trace here</>;
-}
-
-export default TxTraceContainer;
+export default TxTrace;

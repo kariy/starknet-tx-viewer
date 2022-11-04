@@ -1,32 +1,58 @@
+import { useEffect } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+
+import { Chain } from "../../lib/types/starknet";
+import { useTransaction } from "../../providers/TxProvider";
+import { useStarknet } from "../../providers/StarknetProvider";
 
 import Navbar from "./Navbar";
 import TxInfo from "./TxInfo";
 import TxTrace from "./TxTrace";
+import TxExecutionResources from "./TxResources";
 
 function TxViewerContainer() {
-    // fetch all data here
-    // then, store them in their respective context
+    const params = useParams();
+    const { tx } = useTransaction();
+    const { setChain } = useStarknet();
+
+    useEffect(() => {
+        const { chainId, txHash } = params;
+
+        if (!chainId && !txHash) return;
+
+        setChain((chainId as string).toUpperCase() as Chain);
+        tx.setHash(txHash || null);
+    }, [params]);
+
     return (
-        <div>
+        <>
             <TxViewer />
-        </div>
+        </>
     );
 }
 
+const Container = styled.div`
+    /* display: flex;
+    flex-direction: column;
+    position: relative; */
+`;
+
 const ContentWrapper = styled.div`
-    display: flex;
+    min-height: 500px;
+    height: calc(100vh - 60px);
 `;
 
 function TxViewer() {
     return (
-        <div>
+        <Container>
             <Navbar />
             <ContentWrapper>
-                <TxInfo />
+                {/* <TxInfo /> */}
                 <TxTrace />
+                <TxExecutionResources />
             </ContentWrapper>
-        </div>
+        </Container>
     );
 }
 

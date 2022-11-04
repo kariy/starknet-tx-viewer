@@ -1,16 +1,65 @@
-import { createContext, useContext } from "react";
-import { SequencerProvider, SequencerProviderOptions } from "starknet";
+import axios from "axios";
 
-export interface TStarknetContext {
-    provider: SequencerProvider;
-    setup: (opts: SequencerProviderOptions) => void;
+import { createContext, useContext, useMemo } from "react";
+import { Chain } from "../../lib/types/starknet";
+import {
+    TransactionInfo,
+    TransactionReceipt,
+    TransactionTrace,
+} from "../../lib/types/transaction";
+import { getSequencerEndpoint } from "../../lib/utils";
+
+export class Starknet {
+    private url: string;
+
+    constructor(chain: Chain) {
+        this.url = getSequencerEndpoint(chain);
+    }
+
+    async getTransaction(hash: string) {
+        return (
+            await axios.get<TransactionInfo>(
+                `${this.url}/get_transaction?transactionHash=${hash}`
+            )
+        ).data;
+    }
+
+    async getTransactionTrace(hash: string) {
+        return (
+            await axios.get<TransactionTrace>(
+                `${this.url}/get_transaction_trace?transactionHash=${hash}`
+            )
+        ).data;
+    }
+
+    async getTransactionReceipt(hash: string) {
+        return (
+            await axios.get<TransactionReceipt>(
+                `${this.url}/get_transaction_receipt?transactionHash=${hash}`
+            )
+        ).data;
+    }
 }
 
-export const StarknetContext = createContext<TStarknetContext>({
-    provider: new SequencerProvider(),
-    setup: () => {},
+export interface IStarknetContext {
+    chain: Chain;
+    provider: Starknet;
+    setChain: (chain: Chain) => void;
+}
+
+export const StarknetContext = createContext<IStarknetContext>({
+    chain: "MAINNET",
+    provider: new Starknet("MAINNET"),
+    setChain: () => {},
 });
 
-export const useStarknetProvider = function () {
+export const useStarknet = function () {
+    // const { provider } = useContext(StarknetContext);
+
+    // return {
+    //     getTransaction: provider.getTransaction,
+    //     getTransactionTrace: provider.getTransactionTrace,
+    //     getTransactionReceipt: provider.getTransactionReceipt,
+    // };
     return useContext(StarknetContext);
 };
