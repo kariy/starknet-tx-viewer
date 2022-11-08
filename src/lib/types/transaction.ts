@@ -1,4 +1,8 @@
-export type TransactionType = "DEPLOY" | "INVOKE" | "DECLARE" | "L1_HANDLER";
+export type TransactionType =
+    | "DEPLOY"
+    | "INVOKE_FUNCTION"
+    | "DECLARE"
+    | "L1_HANDLER";
 
 export type TransactionStatus =
     | "NOT_RECEIVED"
@@ -46,8 +50,8 @@ export interface TraceMessage extends Omit<L2ToL1Message, "from_address"> {
 
 interface TransactionBlockInfo {
     status: TransactionStatus;
-    block_hash: string;
-    block_number: number;
+    block_hash?: string;
+    block_number?: number;
     transaction_index: number;
 }
 
@@ -84,12 +88,12 @@ export type DeclareTransactionInfo = TransactionInfoTemplate<{
 }>;
 
 export type InvokeTransactionInfo = TransactionInfoTemplate<{
-    nonce: string;
+    nonce?: string;
     max_fee: string;
     calldata: string[];
     signature: string[];
     contract_address: string;
-    entry_point_selector: string;
+    entry_point_selector?: string;
 }>;
 
 export interface TransactionReceipt {
