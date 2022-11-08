@@ -1,14 +1,14 @@
 import { createContext, useContext } from "react";
 
 import {
-    TransactionInfo,
+    InvokeTransactionInfo,
     TransactionReceipt,
     TransactionTrace,
 } from "../../lib/types/transaction";
 
 export interface ITxContext {
     data: {
-        txInfo: TransactionInfo | null;
+        txInfo: InvokeTransactionInfo | null;
         txTrace: TransactionTrace | null;
         txReceipt: TransactionReceipt | null;
     };

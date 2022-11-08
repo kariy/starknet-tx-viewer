@@ -1,8 +1,8 @@
 import styled from "styled-components";
-
 import { useNavigate } from "react-router-dom";
-import { useStarknet } from "../providers/StarknetProvider";
-import { Chain } from "../lib/types/starknet";
+
+import { Chain } from "../../lib/types/starknet";
+import { useStarknet } from "../../providers/StarknetProvider";
 
 const Container = styled.div`
     height: 100vh;

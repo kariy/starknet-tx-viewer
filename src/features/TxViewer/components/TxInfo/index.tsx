@@ -2,10 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import { TxInfo } from "./Info";
-import { useTxInfo, useTxReceipt } from "../../../providers/TxProvider";
-import { SectionHeaderBaseStyle, SectionContainerBaseStyle } from "../styled";
+import { SectionHeaderBaseStyle } from "../styled";
+import { useTxInfo, useTxReceipt } from "../../../../providers/TxProvider";
 
-const Container = styled(SectionContainerBaseStyle)<{ isOpen: boolean }>`
+const Container = styled.div<{ isOpen: boolean }>`
     overflow-y: scroll;
     border: 1px solid gray;
     flex: 1;

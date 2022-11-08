@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { Chain } from "../../lib/types/starknet";
-import { useTransaction } from "../../providers/TxProvider";
-import { useStarknet } from "../../providers/StarknetProvider";
+import { Chain } from "../../../lib/types/starknet";
+import { useTransaction } from "../../../providers/TxProvider";
+import { useStarknet } from "../../../providers/StarknetProvider";
 import { useEffect, useRef } from "react";
 
 const Container = styled.nav`

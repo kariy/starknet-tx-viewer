@@ -3,7 +3,7 @@ import axios from "axios";
 import { createContext, useContext, useMemo } from "react";
 import { Chain } from "../../lib/types/starknet";
 import {
-    TransactionInfo,
+    InvokeTransactionInfo,
     TransactionReceipt,
     TransactionTrace,
 } from "../../lib/types/transaction";
@@ -18,7 +18,7 @@ export class Starknet {
 
     async getTransaction(hash: string) {
         return (
-            await axios.get<TransactionInfo>(
+            await axios.get<InvokeTransactionInfo>(
                 `${this.url}/get_transaction?transactionHash=${hash}`
             )
         ).data;
@@ -54,12 +54,5 @@ export const StarknetContext = createContext<IStarknetContext>({
 });
 
 export const useStarknet = function () {
-    // const { provider } = useContext(StarknetContext);
-
-    // return {
-    //     getTransaction: provider.getTransaction,
-    //     getTransactionTrace: provider.getTransactionTrace,
-    //     getTransactionReceipt: provider.getTransactionReceipt,
-    // };
     return useContext(StarknetContext);
 };

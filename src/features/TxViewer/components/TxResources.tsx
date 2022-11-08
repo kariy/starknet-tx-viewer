@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useTxReceipt } from "../../providers/TxProvider";
+import { useTxReceipt } from "../../../providers/TxProvider";
 
 const Container = styled.div``;
 

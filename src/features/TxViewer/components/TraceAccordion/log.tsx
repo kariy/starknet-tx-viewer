@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-import CopyableText from "../Copyable";
 import { ExpandablStrList } from "./Header";
-import { truncateString } from "../../lib/utils";
-import { TraceEvent, TraceMessage } from "../../lib/types/transaction";
+import { truncateString } from "../../../../lib/utils";
+import CopyableText from "../../../../components/CopyableText";
+import { TraceEvent, TraceMessage } from "../../../../lib/types/transaction";
 
 const Container = styled.div`
     display: flex;

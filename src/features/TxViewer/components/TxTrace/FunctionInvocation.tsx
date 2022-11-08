@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import styled from "styled-components";
 
+import { TraceAccordion } from "../TraceAccordion";
 import { SectionHeaderBaseStyle } from "../styled";
-import { TraceAccordion } from "../../TraceAccordion";
-import { useTxTrace } from "../../../providers/TxProvider";
-import { FunctionInvocation } from "../../../lib/types/transaction";
+import { useTxTrace } from "../../../../providers/TxProvider";
+import { FunctionInvocation } from "../../../../lib/types/transaction";
 
 // @ts-ignore
-import { ReactComponent as ClipboardSvg } from "../../../lib/assets/svgs/Clipboard.svg";
+import { ReactComponent as ClipboardSvg } from "../../../../lib/assets/svgs/Clipboard.svg";
 
 const CopyIcon = styled(ClipboardSvg)`
     cursor: pointer;

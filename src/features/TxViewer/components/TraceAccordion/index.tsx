@@ -2,12 +2,12 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import TraceAccordionHeader from "./Header";
-import { FunctionInvocation } from "../../lib/types/transaction";
+import { EventLog, MessageLog } from "./log";
+import { FunctionInvocation } from "../../../../lib/types/transaction";
 
 // @ts-ignore
-import { ReactComponent as UpSvg } from "../../lib/assets/svgs/ChevronUp.svg";
-import { ReactComponent as DownSvg } from "../../lib/assets/svgs/ChevronDown.svg";
-import { EventLog, MessageLog } from "./log";
+import { ReactComponent as UpSvg } from "../../../../lib/assets/svgs/ChevronUp.svg";
+import { ReactComponent as DownSvg } from "../../../../lib/assets/svgs/ChevronDown.svg";
 
 const Container = styled.div`
     font-family: "Space Mono", monospace;

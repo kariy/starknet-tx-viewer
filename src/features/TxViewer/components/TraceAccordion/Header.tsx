@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import CopyableText from "../Copyable";
-import { truncateString } from "../../lib/utils";
-import { ExpandableStr } from "../ExpandableString";
-import { CallType } from "../../lib/types/transaction";
+import { truncateString } from "../../../../lib/utils";
+import { CallType } from "../../../../lib/types/transaction";
+import CopyableText from "../../../../components/CopyableText";
+import { ExpandableStr } from "../../../../components/ExpandableString";
 
 interface IExpandableStrListProps
     extends React.HTMLAttributes<HTMLSpanElement> {

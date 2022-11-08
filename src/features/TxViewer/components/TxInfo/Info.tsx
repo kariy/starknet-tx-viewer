@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
-import { MonoFont } from "../../styled";
 import {
-    TransactionInfo,
+    DeclareTransactionInfo,
+    DeployTransactionInfo,
+    InvokeTransactionInfo,
+    L1HandlerTransactionInfo,
     TransactionReceipt,
-} from "../../../lib/types/transaction";
+} from "../../../../lib/types/transaction";
+import { MonoFont } from "../../../../components/styled";
 
 const ContentContainer = styled.div``;
 
@@ -46,7 +49,12 @@ const InfoEntry = ({
 );
 
 interface TxInfoProps {
-    info: TransactionInfo;
+    info:
+        | InvokeTransactionInfo
+        | DeclareTransactionInfo
+        | DeployTransactionInfo
+        | L1HandlerTransactionInfo;
+
     receipt: TransactionReceipt;
 }
 
@@ -71,7 +79,7 @@ export function TxInfo({ info, receipt }: TxInfoProps) {
                 value={info.transaction_index}
             />
 
-            <InfoEntry
+            {/* <InfoEntry
                 title="Contract address"
                 value={info.transaction.contract_address}
             />
@@ -86,6 +94,8 @@ export function TxInfo({ info, receipt }: TxInfoProps) {
             <InfoEntry title="Signature" value={info.transaction.signature} />
 
             <InfoEntry title="Max fee" value={info.transaction.max_fee} />
+
+            <InfoEntry title="Class hash" value={info.transaction.class} /> */}
 
             <InfoEntry title="Actual fee" value={receipt.actual_fee} />
 

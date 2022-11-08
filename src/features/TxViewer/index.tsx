@@ -6,10 +6,10 @@ import { Chain } from "../../lib/types/starknet";
 import { useTransaction } from "../../providers/TxProvider";
 import { useStarknet } from "../../providers/StarknetProvider";
 
-import Navbar from "./Navbar";
-import TxInfo from "./TxInfo";
-import TxTrace from "./TxTrace";
-import TxExecutionResources from "./TxResources";
+import TxInfo from "./components/TxInfo";
+import Navbar from "./components/Navbar";
+import TxTrace from "./components/TxTrace";
+import TxExecutionResources from "./components/TxResources";
 
 function TxViewerContainer() {
     const params = useParams();
