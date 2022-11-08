@@ -44,23 +44,53 @@ export interface TraceMessage extends Omit<L2ToL1Message, "from_address"> {
     order: number;
 }
 
-export interface TransactionInfo {
+interface TransactionBlockInfo {
     status: TransactionStatus;
     block_hash: string;
     block_number: number;
     transaction_index: number;
-    transaction: {
-        type: TransactionType;
-        transaction_hash: string;
-        contract_address: string;
-        calldata: string[];
-        max_fee: string;
-        nonce: string;
-        signature: string[];
-        version: string;
-        entry_point_selector: string;
-    };
 }
+
+interface CommonTransactionInfo {
+    type: TransactionType;
+    transaction_hash: string;
+    version: string;
+}
+
+type TransactionInfoTemplate<T> = TransactionBlockInfo & {
+    transaction: CommonTransactionInfo & T;
+};
+
+export type L1HandlerTransactionInfo = TransactionInfoTemplate<{
+    nonce: string;
+    calldata: string[];
+    contract_address: string;
+    entry_point_selector: string;
+}>;
+
+export type DeployTransactionInfo = TransactionInfoTemplate<{
+    class_hash: string;
+    contract_address: string;
+    contract_address_salt: string;
+    constructor_calldata: string[];
+}>;
+
+export type DeclareTransactionInfo = TransactionInfoTemplate<{
+    nonce: string;
+    max_fee: string;
+    class_hash: string;
+    signature: string[];
+    sender_address: string;
+}>;
+
+export type InvokeTransactionInfo = TransactionInfoTemplate<{
+    nonce: string;
+    max_fee: string;
+    calldata: string[];
+    signature: string[];
+    contract_address: string;
+    entry_point_selector: string;
+}>;
 
 export interface TransactionReceipt {
     transaction_hash: string;
