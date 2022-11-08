@@ -32,3 +32,18 @@ export function truncateString(str: string): string {
     const suffix = str.slice(len - 3, len);
     return prefix + "..." + suffix;
 }
+
+/**
+ *
+ * @param str snake case string - snake_case
+ * @returns a new string with more presentable format - Snake case
+ */
+export function snakeCaseToStrPretty(str: string): string {
+    const arr = str.split("_").map((e, i) => {
+        if (i === 0) {
+            const first = e.charAt(0).toUpperCase();
+            return first.concat(e.slice(1).toLowerCase());
+        } else return e.toLowerCase();
+    });
+    return arr.join(" ");
+}

@@ -1,4 +1,4 @@
-export type TransactionType = "DEPLOY" | "INVOKE" | "DECLARE";
+export type TransactionType = "DEPLOY" | "INVOKE" | "DECLARE" | "L1_HANDLER";
 
 export type TransactionStatus =
     | "NOT_RECEIVED"
