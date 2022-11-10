@@ -39,8 +39,9 @@ const Container = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-    min-height: 500px;
-    height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 `;
 
 function TxViewer() {
@@ -48,7 +49,7 @@ function TxViewer() {
         <Container>
             <Navbar />
             <ContentWrapper>
-                {/* <TxInfo /> */}
+                <TxInfo />
                 <TxTrace />
                 <TxExecutionResources />
             </ContentWrapper>

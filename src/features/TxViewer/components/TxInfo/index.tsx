@@ -1,43 +1,63 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { TxInfo } from "./Info";
+import InvokeInfo from "./InvokeInfo";
+import DeployInfo from "./DeployInfo";
+import DeclareInfo from "./DeclareInfo";
 import { SectionHeaderBaseStyle } from "../styled";
 import { useTxInfo, useTxReceipt } from "../../../../providers/TxProvider";
+import {
+    DeclareTransactionInfo,
+    DeployTransactionInfo,
+    InvokeTransactionInfo,
+    L1HandlerTransactionInfo,
+} from "../../../../lib/types/transaction";
+import L1HandlerInfo from "./L1HandlerInfo";
 
-const Container = styled.div<{ isOpen: boolean }>`
+const Container = styled.div`
     overflow-y: scroll;
     border: 1px solid gray;
     flex: 1;
-    width: ${({ isOpen }) => (isOpen ? "580px" : "0px")};
-    ${({ isOpen }) => (!isOpen ? "padding: unset;" : "")}
 `;
 
-const DoorHandle = styled.button<{ isOpen: boolean }>`
-    position: absolute;
-    right: ${({ isOpen }) => (isOpen ? 0 : "-100px")};
-    z-index: 100;
-    top: 0;
-`;
+const Wrapper = styled.div``;
+
+const InfoBox = styled.div``;
 
 function TxInfoContainer() {
     const info = useTxInfo();
     const receipt = useTxReceipt();
 
-    const [open, setOpen] = useState(true);
-    // do all decode stuff here
-
-    const handleSectionOpen = () => setOpen((prev) => !prev);
-
     return (
-        <Container isOpen={open}>
-            <DoorHandle isOpen={open} onClick={handleSectionOpen}>
-                close
-            </DoorHandle>
-
-            <SectionHeaderBaseStyle>Transaction Info</SectionHeaderBaseStyle>
-
-            {info && receipt ? <TxInfo info={info} receipt={receipt} /> : null}
+        <Container>
+            <Wrapper>
+                <SectionHeaderBaseStyle>
+                    TYPE: {info ? info.transaction.type : null}
+                </SectionHeaderBaseStyle>
+                <InfoBox>
+                    {info && receipt ? (
+                        info.transaction.type === "INVOKE_FUNCTION" ? (
+                            <InvokeInfo
+                                info={info as InvokeTransactionInfo}
+                                receipt={receipt}
+                            />
+                        ) : info.transaction.type === "DECLARE" ? (
+                            <DeclareInfo
+                                info={info as DeclareTransactionInfo}
+                                receipt={receipt}
+                            />
+                        ) : info.transaction.type === "DEPLOY" ? (
+                            <DeployInfo info={info as DeployTransactionInfo} />
+                        ) : info.transaction.type === "L1_HANDLER" ? (
+                            <L1HandlerInfo
+                                info={info as L1HandlerTransactionInfo}
+                                receipt={receipt}
+                            />
+                        ) : null
+                    ) : null}
+                </InfoBox>
+            </Wrapper>
+            <Wrapper>{/* put calldata here */}</Wrapper>
         </Container>
     );
 }

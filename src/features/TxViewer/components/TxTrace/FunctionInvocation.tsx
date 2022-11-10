@@ -3,8 +3,12 @@ import styled from "styled-components";
 
 import { TraceAccordion } from "../TraceAccordion";
 import { SectionHeaderBaseStyle } from "../styled";
-import { useTxTrace } from "../../../../providers/TxProvider";
-import { FunctionInvocation } from "../../../../lib/types/transaction";
+import { useTxInfo, useTxTrace } from "../../../../providers/TxProvider";
+import {
+    DeclareTransactionTrace,
+    FunctionInvocation,
+    InvokeTransactionTrace,
+} from "../../../../lib/types/transaction";
 
 // @ts-ignore
 import { ReactComponent as ClipboardSvg } from "../../../../lib/assets/svgs/Clipboard.svg";
@@ -21,15 +25,14 @@ const Container = styled.div`
 
 const Header = styled(SectionHeaderBaseStyle)``;
 
-function FunctionTraceContainer() {
-    const data = useTxTrace();
+interface FunctionTraceProps {
+    data?: FunctionInvocation;
+}
 
+function FunctionTrace({ data }: FunctionTraceProps) {
     const handleCopy = useMemo(
         () => () => {
-            if (data?.function_invocation)
-                navigator.clipboard.writeText(
-                    JSON.stringify(data.function_invocation)
-                );
+            if (data) navigator.clipboard.writeText(JSON.stringify(data));
         },
         [data]
     );
@@ -38,25 +41,13 @@ function FunctionTraceContainer() {
         <Container>
             <Header>
                 Function Invocation
-                <CopyIcon onClick={handleCopy} title="copy raw json" />
+                {data ? (
+                    <CopyIcon onClick={handleCopy} title="copy raw json" />
+                ) : null}
             </Header>
-            {data ? (
-                <FunctionTrace functionInvocation={data.function_invocation} />
-            ) : null}
+            {data ? <TraceAccordion trace={data} /> : null}
         </Container>
     );
 }
 
-interface IFunctionTraceProps {
-    functionInvocation: FunctionInvocation;
-}
-
-function FunctionTrace({ functionInvocation }: IFunctionTraceProps) {
-    return (
-        <>
-            <TraceAccordion trace={functionInvocation} />
-        </>
-    );
-}
-
-export default FunctionTraceContainer;
+export default FunctionTrace;

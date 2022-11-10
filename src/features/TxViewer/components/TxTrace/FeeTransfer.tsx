@@ -21,15 +21,14 @@ const Container = styled.div`
 
 const Header = styled(SectionHeaderBaseStyle)``;
 
-function FeeTransferContainer() {
-    const data = useTxTrace();
+interface FeeTransferProps {
+    data?: FunctionInvocation;
+}
 
+function FeeTransfer({ data }: FeeTransferProps) {
     const handleCopy = useMemo(
         () => () => {
-            if (data?.fee_transfer_invocation)
-                navigator.clipboard.writeText(
-                    JSON.stringify(data.fee_transfer_invocation)
-                );
+            if (data) navigator.clipboard.writeText(JSON.stringify(data));
         },
         [data]
     );
@@ -38,28 +37,14 @@ function FeeTransferContainer() {
         <Container>
             <Header>
                 Fee Transfer
-                <CopyIcon onClick={handleCopy} title="copy raw json" />
+                {data ? (
+                    <CopyIcon onClick={handleCopy} title="copy raw json" />
+                ) : null}
             </Header>
 
-            {data ? (
-                <FeeTransfer feeTransfer={data.fee_transfer_invocation} />
-            ) : null}
+            {data ? <TraceAccordion trace={data} /> : null}
         </Container>
     );
 }
 
-const Wrapper = styled.div``;
-
-interface IFeeTransferProps {
-    feeTransfer: FunctionInvocation;
-}
-
-function FeeTransfer({ feeTransfer }: IFeeTransferProps) {
-    return (
-        <Wrapper>
-            <TraceAccordion trace={feeTransfer} />
-        </Wrapper>
-    );
-}
-
-export default FeeTransferContainer;
+export default FeeTransfer;
