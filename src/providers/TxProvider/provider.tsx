@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
     InvokeTransactionInfo,
     TransactionReceipt,
-    TransactionTrace,
+    InvokeTransactionTrace,
 } from "../../lib/types/transaction";
 import { TxContext } from "./context";
 import { useStarknet } from "../StarknetProvider";
@@ -14,7 +14,7 @@ export const TxProvider: React.FC<{ children: React.ReactNode }> = function ({
     const { provider } = useStarknet();
 
     const [txHash, setTxHash] = useState<string | null>(null);
-    const [trace, setTrace] = useState<TransactionTrace | null>(null);
+    const [trace, setTrace] = useState<InvokeTransactionTrace | null>(null);
     const [info, setInfo] = useState<InvokeTransactionInfo | null>(null);
     const [receipt, setReceipt] = useState<TransactionReceipt | null>(null);
 

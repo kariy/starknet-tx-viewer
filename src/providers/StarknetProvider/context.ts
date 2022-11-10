@@ -1,11 +1,11 @@
 import axios from "axios";
 
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext } from "react";
 import { Chain } from "../../lib/types/starknet";
 import {
     InvokeTransactionInfo,
     TransactionReceipt,
-    TransactionTrace,
+    InvokeTransactionTrace,
 } from "../../lib/types/transaction";
 import { getSequencerEndpoint } from "../../lib/utils";
 
@@ -26,7 +26,7 @@ export class Starknet {
 
     async getTransactionTrace(hash: string) {
         return (
-            await axios.get<TransactionTrace>(
+            await axios.get<InvokeTransactionTrace>(
                 `${this.url}/get_transaction_trace?transactionHash=${hash}`
             )
         ).data;
