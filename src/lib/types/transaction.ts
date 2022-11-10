@@ -104,7 +104,7 @@ export interface TransactionReceipt {
     status: TransactionStatus;
     actual_fee: string;
     events: TransactionEvent[];
-    execution_resources: ExecutionResources;
+    execution_resources?: ExecutionResources;
     l2_to_l1_message: L2ToL1Message[];
 }
 
@@ -125,8 +125,14 @@ export interface FunctionInvocation {
     selector: string;
 }
 
-export interface TransactionTrace {
-    fee_transfer_invocation: FunctionInvocation;
+export interface InvokeTransactionTrace {
     function_invocation: FunctionInvocation;
+    fee_transfer_invocation: FunctionInvocation;
+    signature: string[];
+}
+
+export interface DeclareTransactionTrace {
+    validate_invocation: FunctionInvocation;
+    fee_transfer_invocation: FunctionInvocation;
     signature: string[];
 }
