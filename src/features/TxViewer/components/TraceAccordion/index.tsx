@@ -49,17 +49,18 @@ interface ITraceAccordionProps {
 }
 
 export function TraceAccordion({ trace }: ITraceAccordionProps) {
-    // const [openUpper, setOpenUpper] = useState(false);
     const [openBottom, setOpenBottom] = useState(false);
 
     return (
         <Container>
             <Header>
-                {openBottom ? (
-                    <UpIcon onClick={() => setOpenBottom(false)} />
-                ) : (
-                    <DownIcon onClick={() => setOpenBottom(true)} />
-                )}
+                {trace.internal_calls.length ? (
+                    openBottom ? (
+                        <UpIcon onClick={() => setOpenBottom(false)} />
+                    ) : (
+                        <DownIcon onClick={() => setOpenBottom(true)} />
+                    )
+                ) : null}
 
                 <TraceAccordionHeader
                     result={trace.result}

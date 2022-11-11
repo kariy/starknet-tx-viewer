@@ -46,7 +46,8 @@ function TraceAccordionHeader({
             <span
                 title="call type"
                 style={{
-                    color: callType == "CALL" ? "#F52973" : "#0760E6",
+                    color: callType == "CALL" ? "#e2447e" : "#3279e3",
+                    fontWeight: 600,
                 }}
             >
                 {callType}
