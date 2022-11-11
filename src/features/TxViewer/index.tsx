@@ -25,23 +25,16 @@ function TxViewerContainer() {
         tx.setHash(txHash || null);
     }, [params]);
 
-    return (
-        <>
-            <TxViewer />
-        </>
-    );
+    return <TxViewer />;
 }
 
-const Container = styled.div`
-    /* display: flex;
-    flex-direction: column;
-    position: relative; */
-`;
+const Container = styled.div``;
 
 const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin: 2rem;
 `;
 
 function TxViewer() {
@@ -50,6 +43,7 @@ function TxViewer() {
             <Navbar />
             <ContentWrapper>
                 <TxInfo />
+                <div style={{ border: "1px solid black", height: "0px" }}></div>
                 <TxTrace />
                 <TxExecutionResources />
             </ContentWrapper>

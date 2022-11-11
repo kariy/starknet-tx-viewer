@@ -9,13 +9,12 @@ import {
 import { useTxInfo, useTxTrace } from "../../../../providers/TxProvider";
 
 const Container = styled.div`
-    border: 1px solid green;
+    /* border: 1px solid green; */
     overflow-y: scroll;
 `;
 
 const Wrapper = styled.div`
     width: max-content;
-    padding: 1.5rem;
 `;
 
 function TxTrace() {

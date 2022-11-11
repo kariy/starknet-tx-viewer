@@ -1,50 +1,20 @@
 import styled from "styled-components";
 
-import { InfoGrid } from "./styled";
-import { MonoFont } from "../../../../components/styled";
+import { Entry, InfoContainer, InfoBox, BottomInfo } from "./styled";
 import {
     InvokeTransactionInfo,
     TransactionReceipt,
 } from "../../../../lib/types/transaction";
+import { SectionHeaderBaseStyle } from "../styled";
 
-const Container = styled(InfoGrid)``;
+const Container = styled(InfoContainer)`
+    row-gap: 1rem;
+`;
 
-const EntryWrapper = styled.div`
-    font-size: 0.95rem;
+const Wrapper = styled.div`
     display: flex;
-    flex-direction: column;
-    row-gap: 0.2rem;
-    margin-bottom: 0.5rem;
+    gap: 2rem;
 `;
-
-const EntryKey = styled.div`
-    color: grey;
-    font-style: italic;
-`;
-
-const EntryValue = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
-
-const Entry = ({
-    title,
-    value,
-}: {
-    title: string;
-    value: string | string[] | number | number[];
-}) => (
-    <EntryWrapper>
-        <EntryKey>{title}</EntryKey>
-        <EntryValue>
-            {typeof value == "string" || typeof value == "number" ? (
-                <MonoFont>{value}</MonoFont>
-            ) : (
-                value.map((e) => <MonoFont>{e}</MonoFont>)
-            )}
-        </EntryValue>
-    </EntryWrapper>
-);
 
 interface InvokeInfoProps {
     info: InvokeTransactionInfo;
@@ -53,31 +23,56 @@ interface InvokeInfoProps {
 
 function InvokeInfo({ info, receipt }: InvokeInfoProps) {
     return (
-        <>
-            <Container>
-                <Entry
-                    title="Block hash"
-                    value={info.block_hash || "PENDING"}
-                />
-                <Entry
-                    title="Block number"
-                    value={info.block_number || "PENDING"}
-                />
-                <Entry title="Index" value={info.transaction_index} />
-                <Entry title="Status" value={info.status} />
-                <Entry title="Nonce" value={info.transaction.nonce || "null"} />
-                <Entry
-                    title="Contract address"
-                    value={info.transaction.contract_address}
-                />
-                <Entry
-                    title="Fee"
-                    value={`${receipt.actual_fee} / ${info.transaction.max_fee} ETH`}
-                />
-                <Entry title="Version" value={info.transaction.version} />
-                <Entry title="Timestamp" value="timestamp here" />
-            </Container>
-        </>
+        <Container>
+            <InfoBox>
+                <Wrapper>
+                    <Entry
+                        title="Block hash"
+                        value={info.block_hash || "PENDING"}
+                    />
+                    <Entry
+                        title="Block number"
+                        value={info.block_number || "PENDING"}
+                    />
+                    <Entry title="Index" value={info.transaction_index} />
+                    <Entry title="Status" value={info.status} />
+                    <Entry
+                        title="Nonce"
+                        value={info.transaction.nonce || "null"}
+                    />
+                </Wrapper>
+                <Wrapper>
+                    <Entry
+                        title="Contract address"
+                        value={info.transaction.contract_address}
+                    />
+                    <Entry
+                        title="Fee"
+                        value={`${receipt.actual_fee} / ${info.transaction.max_fee} ETH`}
+                    />
+                    <Entry title="Version" value={info.transaction.version} />
+                    <Entry title="Timestamp" value="timestamp here" />
+                </Wrapper>
+            </InfoBox>
+            <BottomInfo>
+                <div style={{ flex: 1, border: "1px solid blue" }}>
+                    <SectionHeaderBaseStyle>Calldata</SectionHeaderBaseStyle>
+                    <div>
+                        {info.transaction.calldata.map((e) => (
+                            <div>{e}</div>
+                        ))}
+                    </div>
+                </div>
+                <div style={{ flex: 1, border: "1px solid blue" }}>
+                    <SectionHeaderBaseStyle>Signature</SectionHeaderBaseStyle>
+                    <div>
+                        {info.transaction.signature.map((e) => (
+                            <div>{e}</div>
+                        ))}
+                    </div>
+                </div>
+            </BottomInfo>
+        </Container>
     );
 }
 
