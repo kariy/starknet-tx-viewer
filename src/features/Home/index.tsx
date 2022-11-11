@@ -1,6 +1,8 @@
 import styled from "styled-components";
-
 import { useNavigate } from "react-router-dom";
+
+import { Chain } from "../../lib/types/starknet";
+import { useStarknet } from "../../providers/StarknetProvider";
 
 const Container = styled.div`
     height: 100vh;
@@ -38,21 +40,27 @@ const SearchButton = styled.button`
 `;
 
 function Home() {
+    const { setChain } = useStarknet();
     const navigate = useNavigate();
 
-    const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    const handleTxSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         const chain = e.currentTarget.chainId.value;
         const txHash = e.currentTarget.txHash.value;
-        if (chain && txHash) navigate(`/${chain}/${txHash}`);
+        if (chain && txHash)
+            navigate(`/${(chain as string).toLowerCase()}/${txHash}`);
     };
 
+    const handleChainChange: React.ChangeEventHandler<HTMLSelectElement> = (
+        e
+    ) => setChain(e.currentTarget.value as Chain);
     return (
         <Container>
-            <Form onSubmit={onSubmit}>
-                <ChainSelector name="chainId">
-                    <option value="alpha-mainnet">Mainnet</option>
-                    <option value="alpha-goerli">Testnet 1</option>
+            <Form onSubmit={handleTxSubmit}>
+                <ChainSelector name="chainId" onChange={handleChainChange}>
+                    <option value="MAINNET">mainnet</option>
+                    <option value="GOERLI">goerli</option>
+                    <option value="GOERLI2">goerli 2</option>
                 </ChainSelector>
 
                 <SearchInput

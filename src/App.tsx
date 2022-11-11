@@ -2,16 +2,16 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Provider from "./providers";
 
-import Home from "./components/Home";
-import TxViewer from "./components/TxViewer";
+import Home from "./features/Home";
+import TxViewer from "./features/TxViewer";
 
 function App() {
     return (
         <BrowserRouter>
             <Provider>
                 <Routes>
+                    <Route path="/:chainId/:txHash" element={<TxViewer />} />
                     <Route path="/" element={<Home />} />
-                    <Route path="/:chain/:txHash" element={<TxViewer />} />
                 </Routes>
             </Provider>
         </BrowserRouter>

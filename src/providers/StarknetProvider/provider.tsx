@@ -1,21 +1,24 @@
-import { useEffect, useMemo, useState } from "react";
-import { SequencerProvider, SequencerProviderOptions } from "starknet";
-import { StarknetContext } from "./context";
+import React, { useMemo, useState } from "react";
 
-export function StarknetProvider({ children }: any) {
-    const [config, setConfig] = useState<SequencerProviderOptions>({
-        network: "mainnet-alpha",
-    });
-    const provider = useMemo(() => new SequencerProvider(config), [config]);
+import { Chain } from "../../lib/types/starknet";
+import { Starknet, StarknetContext } from "./context";
 
-    return (
-        <StarknetContext.Provider
-            value={{
-                provider,
-                setup: setConfig,
-            }}
-        >
-            {children}
-        </StarknetContext.Provider>
-    );
-}
+export const StarknetProvider: React.FC<{ children: React.ReactNode }> =
+    function ({ children }) {
+        const [chain, setChain] = useState<Chain>("MAINNET");
+        const provider = useMemo(() => new Starknet(chain), [chain]);
+
+        return (
+            <StarknetContext.Provider
+                value={{
+                    chain,
+                    provider,
+                    setChain,
+                }}
+            >
+                {children}
+            </StarknetContext.Provider>
+        );
+    };
+
+export default StarknetProvider;
