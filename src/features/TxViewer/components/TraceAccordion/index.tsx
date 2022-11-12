@@ -6,6 +6,7 @@ import { EventLog, MessageLog } from "./log";
 import { FunctionInvocation } from "../../../../lib/types/transaction";
 
 // @ts-ignore
+import { ReactComponent as BarSvg } from "../../../../lib/assets/svgs/Bar.svg";
 import { ReactComponent as UpSvg } from "../../../../lib/assets/svgs/ChevronUp.svg";
 import { ReactComponent as DownSvg } from "../../../../lib/assets/svgs/ChevronDown.svg";
 
@@ -29,6 +30,11 @@ const UpIcon = styled(UpSvg)`
 const DownIcon = styled(DownSvg)`
     cursor: pointer;
     min-width: 18px;
+`;
+
+const BarIcon = styled(BarSvg)`
+    width: 18px;
+    color: grey;
 `;
 
 const ContentWrapper = styled.div``;
@@ -60,7 +66,9 @@ export function TraceAccordion({ trace }: ITraceAccordionProps) {
                     ) : (
                         <DownIcon onClick={() => setOpenBottom(true)} />
                     )
-                ) : null}
+                ) : (
+                    <BarIcon />
+                )}
 
                 <TraceAccordionHeader
                     result={trace.result}
