@@ -1,19 +1,25 @@
 import styled from "styled-components";
 
-import { Entry, InfoContainer, InfoBox, BottomInfo } from "./styled";
 import {
-    InvokeTransactionInfo,
+    Entry,
+    InfoBox,
+    BottomInfo,
+    InfoContainer,
+    AccordionArrayWrapper,
+} from "./styled";
+import {
     TransactionReceipt,
+    InvokeTransactionInfo,
 } from "../../../../lib/types/transaction";
-import { SectionHeaderBaseStyle } from "../styled";
+import Accordion from "../../../../components/Accordion";
 
 const Container = styled(InfoContainer)`
     row-gap: 1rem;
 `;
 
 const Wrapper = styled.div`
-    display: flex;
     gap: 2rem;
+    display: flex;
 `;
 
 interface InvokeInfoProps {
@@ -57,23 +63,21 @@ function InvokeInfo({ info, receipt }: InvokeInfoProps) {
                     <Entry title="Timestamp" value="timestamp here" />
                 </Wrapper>
             </InfoBox>
+
             <BottomInfo>
-                <div style={{ flex: 1, border: "1px solid blue" }}>
-                    <SectionHeaderBaseStyle>Calldata</SectionHeaderBaseStyle>
-                    <div>
-                        {info.transaction.calldata.map((e) => (
-                            <div>{e}</div>
-                        ))}
-                    </div>
-                </div>
-                <div style={{ flex: 1, border: "1px solid blue" }}>
-                    <SectionHeaderBaseStyle>Signature</SectionHeaderBaseStyle>
-                    <div>
-                        {info.transaction.signature.map((e) => (
-                            <div>{e}</div>
-                        ))}
-                    </div>
-                </div>
+                <Accordion
+                    title={`Calldata (${info.transaction.calldata.length})`}
+                    style={{ flex: 1 }}
+                >
+                    <AccordionArrayWrapper array={info.transaction.calldata} />
+                </Accordion>
+
+                <Accordion
+                    title={`Signature (${info.transaction.signature.length})`}
+                    style={{ flex: 1 }}
+                >
+                    <AccordionArrayWrapper array={info.transaction.signature} />
+                </Accordion>
             </BottomInfo>
         </Container>
     );

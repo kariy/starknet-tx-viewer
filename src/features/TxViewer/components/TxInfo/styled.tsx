@@ -14,6 +14,7 @@ export const InfoContainer = styled.div`
 export const InfoBox = styled.div`
     border: 1px solid grey;
     padding: 1.5rem 2rem;
+    font-size: 1.1rem;
 `;
 
 export const BottomInfo = styled.div`
@@ -21,12 +22,40 @@ export const BottomInfo = styled.div`
     flex-direction: row;
     gap: 2rem;
     margin-top: 1rem;
-    /* justify-content: space-between; */
     font-family: "Space Mono", monospace;
 `;
 
+export const AccordionArrayWrapper = ({
+    array,
+}: {
+    array: string[] | number[];
+}) => (
+    <div
+        style={{
+            display: "grid",
+            gridTemplateColumns: "max-content 1fr",
+            columnGap: "1.3rem",
+        }}
+    >
+        {array.map((e, idx) => (
+            <>
+                <div
+                    style={{
+                        color: "grey",
+                        fontStyle: "italic",
+                        fontSize: "0.95rem",
+                    }}
+                >
+                    {idx}
+                </div>
+                <div>{e}</div>
+            </>
+        ))}
+    </div>
+);
+
 const EntryWrapper = styled.div`
-    font-size: 0.95rem;
+    font-size: 0.9em;
     display: flex;
     flex-direction: column;
     row-gap: 0.2rem;
@@ -36,7 +65,6 @@ const EntryWrapper = styled.div`
 const EntryKey = styled.div`
     color: grey;
     font-style: italic;
-    /* font-weight: 500; */
 `;
 
 const EntryValue = styled.div`
