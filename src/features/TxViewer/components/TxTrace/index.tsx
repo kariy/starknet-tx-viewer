@@ -2,10 +2,6 @@ import styled from "styled-components";
 
 import FeeTransfer from "./FeeTransfer";
 import FunctionTrace from "./FunctionInvocation";
-import {
-    InvokeTransactionTrace,
-    DeclareTransactionTrace,
-} from "../../../../lib/types/transaction";
 import { useTxInfo, useTxTrace } from "../../../../providers/TxProvider";
 
 const Container = styled.div`
@@ -15,6 +11,8 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
     width: max-content;
+    padding-right: 3rem;
+    padding-bottom: 1rem;
 `;
 
 function TxTrace() {

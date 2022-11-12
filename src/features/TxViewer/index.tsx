@@ -43,7 +43,13 @@ function TxViewer() {
             <Navbar />
             <ContentWrapper>
                 <TxInfo />
-                <div style={{ border: "1px solid black", height: "0px" }}></div>
+                <div
+                    style={{
+                        border: "1px solid black",
+                        height: "0px",
+                        margin: "0.7rem 0",
+                    }}
+                ></div>
                 <TxTrace />
                 <TxExecutionResources />
             </ContentWrapper>
