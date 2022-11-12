@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-import { InfoGrid } from "./styled";
+import { InfoBox } from "./styled";
 import { MonoFont } from "../../../../components/styled";
 import {
     L1HandlerTransactionInfo,
     TransactionReceipt,
 } from "../../../../lib/types/transaction";
 
-const Container = styled(InfoGrid)``;
+const Container = styled(InfoBox)``;
 
 const EntryWrapper = styled.div`
     font-size: 0.95rem;
@@ -64,7 +64,10 @@ function L1HandlerInfo({ info, receipt }: InvokeInfoProps) {
                     value={info.block_number || "PENDING"}
                 />
                 <Entry title="Index" value={info.transaction_index} />
-                <Entry title="Status" value={info.status} />
+                <Entry
+                    title="Status"
+                    value={info.status.replaceAll("_", " ")}
+                />
                 <Entry title="Nonce" value={info.transaction.nonce || "null"} />
                 <Entry
                     title="Contract address"

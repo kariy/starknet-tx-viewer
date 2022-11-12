@@ -23,7 +23,7 @@ function TxInfoContainer() {
     return (
         <Container>
             <SectionHeaderBaseStyle>
-                TYPE: {info ? info.transaction.type : null}
+                TYPE: {info ? info.transaction.type.replaceAll("_", " ") : null}
             </SectionHeaderBaseStyle>
 
             {info && receipt ? (

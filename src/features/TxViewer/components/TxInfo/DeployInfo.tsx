@@ -32,7 +32,10 @@ function DeployInfo({ info }: DeployInfoProps) {
                     value={info.block_number || "PENDING"}
                 />
                 <Entry title="Index" value={info.transaction_index} />
-                <Entry title="Status" value={info.status} />
+                <Entry
+                    title="Status"
+                    value={info.status.replaceAll("_", " ")}
+                />
             </Wrapper>
 
             <Wrapper>

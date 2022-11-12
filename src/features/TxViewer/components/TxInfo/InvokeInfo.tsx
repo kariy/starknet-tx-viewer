@@ -35,7 +35,10 @@ function InvokeInfo({ info, receipt }: InvokeInfoProps) {
                         value={info.block_number || "PENDING"}
                     />
                     <Entry title="Index" value={info.transaction_index} />
-                    <Entry title="Status" value={info.status} />
+                    <Entry
+                        title="Status"
+                        value={info.status.replaceAll("_", " ")}
+                    />
                     <Entry
                         title="Nonce"
                         value={info.transaction.nonce || "null"}
